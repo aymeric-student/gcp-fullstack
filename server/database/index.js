@@ -1,5 +1,13 @@
 const mongoose = require('mongoose');
+const mongodbUser = process.env.MONGODB_USER;
+const mongodbPassword = encodeURIComponent(process.env.MONGODB_PASSWORD);
+const mongodbhost = process.env.MONGODB_HOST;
 
-mongoose.connect('mongodb+srv://jean:123@cluster0.urpjt.gcp.mongodb.net/vue3c23?retryWrites=true&w=majority').then(() => {
-    console.log('Connected !')
-}).catch(e => console.log(e));
+const connectionString = `mongodb://${mongodbUser}:${mongodbPassword}@${mongodbhost}`;
+
+mongoose
+    .connect(connectionString)
+    .then(() => {
+        console.log('Connected !');
+    })
+    .catch((e) => console.log(e));
